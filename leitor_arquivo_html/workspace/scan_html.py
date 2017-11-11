@@ -3,30 +3,35 @@ from io import BytesIO
 import pycurl
 import pprint
 
-def get_file():
+def content_file():
 	file = input('digite o nome do arquivo: ')
+	conteudo = ''
 
 	try:
 		t_file = open(file)
+		list_texto = t_file.readlines()
+		conteudo = ''
+
+		for line in list_texto:
+			conteudo += line+'\n'
+		return conteudo
 
 	except FileNotFoundError as e:
-		t_file = open(file, 'w')
-		t_file = open(file)
+		return '\nErro: Arquivo não encontrado!\n'
 
-	return t_file
+
 
 def set_file(text):
 	file = input('digite o nome do arquivo: ')
 	m_file = open(file, 'w')
 	m_file.write(text)
 	m_file.close()
-	print('Success!! ; ) ')
+	print('\nSuccess!!\n')
 
 def str_html(scan):
 	text = scan.getvalue()
 	soup = beautiful(text, 'html.parser')
 	text = soup.prettify()
-
 	return text
 
 def scan_url(url):
@@ -36,7 +41,6 @@ def scan_url(url):
 	c.setopt(c.WRITEDATA, scan)
 	c.perform()
 	c.close()
-
 	return scan
 
 def main():
@@ -53,7 +57,7 @@ def main():
 		op = int(input('digite a opção: '))
 
 		if op == 0:
-			print('programa encerrado.')
+			print('\nprograma encerrado.\n')
 
 		elif op == 1:
 			m_url = input('Digite a url: ')
@@ -62,14 +66,8 @@ def main():
 			set_file(m_text)
 
 		elif op == 2:
-			file = get_file()
-			list_texto = file.readlines()
-			conteudo = ''
-
-			for line in list_texto:
-				conteudo += line+'\n'
-
-			print(conteudo)
+			file = content_file()
+			print(file)
 
 if __name__ == '__main__':
 	main()
