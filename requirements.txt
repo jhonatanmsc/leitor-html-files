@@ -45,7 +45,7 @@ screen==1.0.1
 selenium==3.5.0
 six==1.11.0
 tox==2.8.2
-urllib3==1.22
+urllib3==1.26.5
 vine==1.1.4
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
